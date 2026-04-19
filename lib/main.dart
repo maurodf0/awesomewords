@@ -47,8 +47,6 @@ return Scaffold(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('A random AWESOME idea:'),
-        SizedBox(height: 16),
         BigCard(pair: pair),
         SizedBox(height: 16),
         ElevatedButton(

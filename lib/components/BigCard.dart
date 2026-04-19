@@ -15,7 +15,7 @@ class BigCard extends StatelessWidget {
     final style = theme.textTheme.displayMedium!.copyWith(
       color: theme.colorScheme.onPrimary,
     );
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Card(
       color: theme.colorScheme.primary,
