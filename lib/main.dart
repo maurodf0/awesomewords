@@ -1,4 +1,5 @@
 import 'package:awesomewords/components/BigCard.dart';
+import 'package:awesomewords/pages/GeneratorPages.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,31 +43,47 @@ class MyAppState extends ChangeNotifier {
       } else {
         favorites.add(current);
       }
+      notifyListeners();
      }
+
+     
 }
 
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    var pair = appState.current;
-
-return Scaffold(
-  body: Padding(
-    padding: const EdgeInsets.all(10),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        BigCard(pair: pair),
-        SizedBox(height: 16),
-        ElevatedButton(
-          onPressed: () => appState.getNext(),
-          child: Text('Next'),
-        ),
-      ],
-    ),
-  ),
-);
+    return Scaffold(
+      body: Row(
+        children: [
+          SafeArea(
+            child: NavigationRail(
+              extended: false,
+              destinations: [
+                NavigationRailDestination(
+                  icon: Icon(Icons.home),
+                  label: Text('Home'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.favorite),
+                  label: Text('Favorites'),
+                ),
+              ],
+              selectedIndex: 0,
+              onDestinationSelected: (value) {
+                print('selected: $value');
+              },
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              child: GeneratorPage(),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
+
 
