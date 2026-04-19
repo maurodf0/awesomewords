@@ -6,8 +6,10 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
+    var favorites = appState.favorites;
+    
 
-    if (appState.favorites.isEmpty) {
+    if (favorites.isEmpty) {
       return Center(
         child: Text('No favorites yet.'),
       );
@@ -18,13 +20,15 @@ class FavoritesPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(20),
           child: Text('You have '
-              '${appState.favorites.length} favorites:'),
+              '${favorites.length} favorites:'),
         ),
         for (var pair in appState.favorites)
-          ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text(pair.asLowerCase),
-          ),
+         ListTile(
+          title: Text(pair.asLowerCase),
+          trailing: IconButton(
+            onPressed: () => appState.removeFavorite(pair), 
+            icon: const Icon(Icons.delete)),
+         )
       ],
     );
   }
